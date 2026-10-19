@@ -3,5 +3,5 @@ terraform {
 }
 
 output "welcome_message" {
-  value = "Hello Amit, I am learning Terraform with VS Code and Github."
+  value = "Hello ${var.student_name}, welcome to Terraform!"
   }
