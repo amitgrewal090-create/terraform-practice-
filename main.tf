@@ -2,6 +2,6 @@ terraform {
   required_version = ">= 1.0.0"
 }
 
-output "message" {
-  value = "Hello Amit! Terraform is connected to GitHub."
-}
+output "welcome_message" {
+  value = "Hello Amit, I am learning Terraform with VS Code and Github."
+  }
