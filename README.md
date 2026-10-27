@@ -126,3 +126,105 @@ My objective is to build practical DevOps skills by integrating these tools into
 
 Author: Amit Kumar
 
+
+
+Jenkins Pipeline Documentation
+
+
+
+Overview
+
+
+
+Jenkins is used in this project to learn pipeline automation and understand how code can be executed through a Jenkins job integrated with GitHub.
+
+
+
+Pipeline Stages
+
+
+
+Stage 1: Hello
+
+
+
+Purpose: To verify that the Jenkins pipeline executes successfully and displays a custom message.
+
+
+
+Console Output:
+
+"Hello Amit! My first Jenkins pipeline is working."
+
+
+
+Result: Successful.
+
+
+
+Stage 2: DevOps Practice
+
+
+
+Purpose: To display the technologies being practiced as part of my DevOps learning journey.
+
+
+
+Console Output:
+
+"Learning Jenkins, GitHub and Terraform."
+
+
+
+Result: Successful.
+
+
+
+Build Execution Results
+
+
+
+The Jenkins Console Output confirms that both pipeline stages executed successfully.
+
+
+
+Build Status: SUCCESS
+
+
+
+What I Learned:
+
+
+
+\- How to execute a Jenkins pipeline.
+
+\- How to define and run pipeline stages.
+
+\- How to display messages using the "echo" step.
+
+\- How to review build execution results in the Jenkins Console Output.
+
+\- How Jenkins integrates with a GitHub-hosted project.
+
+
+
+Testing Status
+
+
+
+The current pipeline verifies basic stage execution and message output. A separate automated testing stage has not yet been implemented.
+
+
+
+Future Improvements
+
+
+
+\- Add a dedicated validation stage for Terraform configuration.
+
+\- Integrate appropriate automated checks into the pipeline.
+
+\- Document any future build failures and troubleshooting steps.
+
+\- Explore automated pipeline triggers from GitHub.
+
