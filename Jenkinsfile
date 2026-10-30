@@ -20,30 +20,49 @@ pipeline {
 
         stage('Check Terraform Version') {
             steps {
-                bat '"C:\\Terraform\\terraform.exe" -version'
+                bat 'terraform -version'
             }
         }
 
         stage('Terraform Init') {
             steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-devops-practice']]) {
-                    bat '"C:\\Terraform\\terraform.exe" init'
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'aws-devops-practice']]) {
+                    bat 'terraform init'
                 }
             }
         }
 
         stage('Terraform Validate') {
             steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-devops-practice']]) {
-                    bat '"C:\\Terraform\\terraform.exe" validate'
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'aws-devops-practice']]) {
+                    bat 'terraform validate'
                 }
             }
         }
 
         stage('Terraform Plan') {
             steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-devops-practice']]) {
-                    bat '"C:\\Terraform\\terraform.exe" plan'
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'aws-devops-practice']]) {
+                    bat 'terraform plan -out=tfplan'
+                }
+            }
+        }
+
+        stage('Approval') {
+            steps {
+                input message: 'Do you approve Terraform Apply?',
+                      ok: 'Approve'
+            }
+        }
+
+        stage('Terraform Apply') {
+            steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'aws-devops-practice']]) {
+                    bat 'terraform apply -input=false tfplan'
                 }
             }
         }
