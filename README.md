@@ -460,6 +460,46 @@ Through this project, I am developing practical skills in:
 
 
 
+Terraform Remote Backend Configuration and Verification
+
+
+
+Configured an Amazon S3 remote backend to securely store Terraform state files separately from the infrastructure resources managed by Terraform.
+
+
+
+Backend Configuration:
+
+
+
+\- Backend Type: Amazon S3
+
+\- Backend Bucket: amit-terraform-state-2026-unique-3010
+
+\- State File Key: terraform-practice/terraform.tfstate
+
+\- AWS Region: eu-north-1
+
+
+
+Verification Performed:
+
+
+
+1\. Verified the existence of the remote backend S3 bucket using AWS CLI.
+
+2\. Confirmed that the Terraform state file exists in the configured S3 bucket.
+
+3\. Verified server-side encryption using AES256.
+
+4\. Confirmed that an S3 Version ID is available for the state object.
+
+
+
+Result: Terraform remote state storage was successfully verified in Amazon S3.
+
+
+
 11\. Future Improvements
 
 
