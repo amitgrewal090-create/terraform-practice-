@@ -28,7 +28,7 @@ pipeline {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
                     credentialsId: 'aws-devops-practice']]) {
-                    bat 'terraform init'
+                    bat 'terraform init -reconfigure'
                 }
             }
         }
