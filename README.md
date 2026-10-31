@@ -6,7 +6,7 @@ Terraform DevOps Practice Project
 
 
 
-This project is part of my hands-on DevOps learning journey. It demonstrates practical implementation of Git, GitHub, Docker, Terraform, Jenkins, and AWS.
+This project is part of my hands-on DevOps learning journey. It demonstrates the practical implementation of Git, GitHub, Docker, Terraform, Jenkins, and AWS.
 
 
 
@@ -50,15 +50,15 @@ File/Directory| Purpose
 
 "main.tf"| Main Terraform configuration and outputs
 
-"AWS.tf"| AWS provider configuration
+"aws.tf"| AWS provider configuration and S3 backend
 
-"EC2.tf"| EC2 instance configuration
+"ec2.tf"| EC2 instance configuration
 
-"S3.tf"| Amazon S3 bucket configuration
+"s3.tf"| Amazon S3 bucket and security configuration
 
-"variable.tf"| Input variable declarations
+"variables.tf"| Input variable declarations
 
-"Terraform.tfvars"| Variable values for local practice
+"terraform.tfvars"| Variable values for local practice
 
 "Jenkinsfile"| Jenkins pipeline definition
 
@@ -92,7 +92,7 @@ terraform init
 
 
 
-Validates the configuration:
+Validate the configuration:
 
 
 
@@ -100,7 +100,7 @@ terraform validate
 
 
 
-Generates an execution plan:
+Generate an execution plan:
 
 
 
@@ -108,7 +108,7 @@ terraform plan
 
 
 
-Applies the configuration:
+Apply the configuration:
 
 
 
@@ -116,7 +116,7 @@ terraform apply
 
 
 
-Displays the current Terraform-managed resources:
+Display Terraform-managed resources:
 
 
 
@@ -184,7 +184,7 @@ The following security configurations were implemented:
 
 
 
-The bucket configuration was applied successfully and verified using AWS CLI commands.
+The bucket configuration was applied successfully.
 
 
 
@@ -328,7 +328,7 @@ DevOps Practice| Displays the technologies being practised
 
 Check Terraform Version| Checks the installed Terraform version
 
-Terraform Init| Initializes the Terraform working directory
+Terraform Init| Initializes the Terraform working directory and reconfigures the S3 backend
 
 Terraform Validate| Validates the Terraform configuration
 
@@ -337,6 +337,22 @@ Terraform Plan| Generates an infrastructure execution plan
 Approval| Waits for manual approval before applying changes
 
 Terraform Apply| Applies the approved Terraform execution plan
+
+
+
+Terraform Backend Initialization in Jenkins
+
+
+
+The Jenkins pipeline uses the following command:
+
+
+
+bat 'terraform init -reconfigure'
+
+
+
+This ensures that the Jenkins workspace uses the configured Amazon S3 remote backend.
 
 
 
@@ -356,6 +372,8 @@ Observed results:
 
 \- Terraform initialization completed successfully.
 
+\- S3 remote backend was configured successfully.
+
 \- Terraform configuration validation passed.
 
 \- Terraform plan completed successfully.
@@ -372,7 +390,7 @@ The final execution reported:
 
 
 
-Resources: 0 added, 0 changed, 0 destroyed.
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
 
 
 
@@ -430,6 +448,8 @@ The following activities have been completed:
 
 \- Docker application files uploaded to GitHub.
 
+\- Terraform remote backend configuration and verification.
+
 
 
 10\. Learning Outcomes
@@ -464,7 +484,7 @@ Terraform Remote Backend Configuration and Verification
 
 
 
-Configured an Amazon S3 remote backend to securely store Terraform state files separately from the infrastructure resources managed by Terraform.
+Configured an Amazon S3 remote backend to store Terraform state files separately from the infrastructure resources managed by Terraform.
 
 
 
@@ -474,11 +494,11 @@ Backend Configuration:
 
 \- Backend Type: Amazon S3
 
-\- Backend Bucket: amit-terraform-state-2026-unique-3010
+\- Backend Bucket: "amit-terraform-state-2026-unique-3010"
 
-\- State File Key: terraform-practice/terraform.tfstate
+\- State File Key: "terraform-practice/terraform.tfstate"
 
-\- AWS Region: eu-north-1
+\- AWS Region: "eu-north-1"
 
 
 
