@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         AWS_DEFAULT_REGION = 'eu-north-1'
+        DOCKER_IMAGE = 'amitkumardevops2026/devops-cicd-app:1.0'
     }
 
     stages {
@@ -14,7 +15,7 @@ pipeline {
 
         stage('DevOps Practice') {
             steps {
-                echo 'Learning Jenkins, GitHub and Terraform.'
+                echo 'Learning Jenkins, GitHub, Terraform and Docker.'
             }
         }
 
@@ -63,6 +64,25 @@ pipeline {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
                     credentialsId: 'aws-devops-practice']]) {
                     bat 'terraform apply -input=false tfplan'
+                }
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                bat 'docker build -t %DOCKER_IMAGE% .\\docker-app'
+            }
+        }
+
+        stage('Docker Push') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-credentials',
+                    usernameVariable: 'DOCKER_USERNAME',
+                    passwordVariable: 'DOCKER_PASSWORD'
+                )]) {
+                    bat 'echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USERNAME% --password-stdin'
+                    bat 'docker push %DOCKER_IMAGE%'
                 }
             }
         }
