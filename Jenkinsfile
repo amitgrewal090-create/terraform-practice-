@@ -4,9 +4,12 @@ pipeline {
     environment {
         AWS_DEFAULT_REGION = 'eu-north-1'
         DOCKER_IMAGE = 'amitkumardevops2026/devops-cicd-app:1.0'
+
+        PATH+DOCKER = 'C:/Users/Amit/AppData/Local/Programs/DockerDesktop/resources/bin'
     }
 
     stages {
+
         stage('Hello') {
             steps {
                 echo 'Hello Amit! My Jenkins pipeline is working.'
@@ -29,6 +32,7 @@ pipeline {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
                     credentialsId: 'aws-devops-practice']]) {
+
                     bat 'terraform init -reconfigure'
                 }
             }
@@ -38,6 +42,7 @@ pipeline {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
                     credentialsId: 'aws-devops-practice']]) {
+
                     bat 'terraform validate'
                 }
             }
@@ -47,6 +52,7 @@ pipeline {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
                     credentialsId: 'aws-devops-practice']]) {
+
                     bat 'terraform plan -out=tfplan'
                 }
             }
@@ -63,8 +69,15 @@ pipeline {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
                     credentialsId: 'aws-devops-practice']]) {
+
                     bat 'terraform apply -input=false tfplan'
                 }
+            }
+        }
+
+        stage('Docker Version') {
+            steps {
+                bat 'docker --version'
             }
         }
 
@@ -81,7 +94,9 @@ pipeline {
                     usernameVariable: 'DOCKER_USERNAME',
                     passwordVariable: 'DOCKER_PASSWORD'
                 )]) {
+
                     bat 'echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USERNAME% --password-stdin'
+
                     bat 'docker push %DOCKER_IMAGE%'
                 }
             }
