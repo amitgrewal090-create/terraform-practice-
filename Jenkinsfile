@@ -5,7 +5,7 @@ pipeline {
         AWS_DEFAULT_REGION = 'eu-north-1'
         DOCKER_IMAGE = 'amitkumardevops2026/devops-web:v1'
         DOCKER_EXE = 'C:/Users/Amit/AppData/Local/Programs/DockerDesktop/resources/bin/docker.exe'
-        SSH_EXE = 'C:/Windows/System32/OpenSSH/ssh.exe'
+        SSH_EXE = 'C:/Program Files/Git/usr/bin/ssh.exe'
         PATH = "C:/Windows/System32/OpenSSH;${env.PATH}"
     }
 
