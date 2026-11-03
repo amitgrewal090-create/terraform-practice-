@@ -91,7 +91,7 @@ pipeline {
                     usernameVariable: 'DOCKER_USERNAME',
                     passwordVariable: 'DOCKER_PASSWORD'
                 )]) {
-                    bat 'echo %DOCKER_PASSWORD% | "%DOCKER_EXE%" login -u %DOCKER_USERNAME% --password-stdin'
+                    bat 'powershell -NoProfile -NonInteractive -Command "$env:DOCKER_PASSWORD | & $env:DOCKER_EXE login --username $env:DOCKER_USERNAME --password-stdin; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }"'
                     bat '"%DOCKER_EXE%" push %DOCKER_IMAGE%'
                 }
             }
