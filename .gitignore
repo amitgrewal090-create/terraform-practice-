@@ -2,3 +2,6 @@
 *.tfstate.*
 *.tfvars
 .terraform/
+# Local backup and Docker image files
+Jenkinsfile.backup
+*.tar
