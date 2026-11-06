@@ -1,4 +1,4 @@
-Terraform DevOps Practice Project
+amit-Terraform DevOps Practice Project
 
 
 
@@ -244,7 +244,7 @@ Build Docker Image
 
 
 
-docker build -t amit-devops-website:1.0 ./docker-app
+docker build -t amitkumardevops2026/devops-web:v1 ./docker-app
 
 
 
@@ -260,7 +260,7 @@ Run Docker Container
 
 
 
-docker run -d -p 8081:80 --name amit-devops-container amit-devops-website:1.0
+docker run -d --restart unless-stopped -p 8081:80 --name devops-web-v1-container amitkumardevops2026/devops-web:v1
 
 
 
@@ -292,9 +292,9 @@ Docker Application Details
 
 
 
-\- Image Name: "amit-devops-website:1.0"
+\- Image Name: "amitkumardevops2026/devops-web:v1"
 
-\- Container Name: "amit-devops-container"
+\- Container Name: "devops-web-v1-container"
 
 \- Application Server: Nginx
 
@@ -304,101 +304,38 @@ Docker Application Details
 
 
 
-7\. Jenkins CI/CD Pipeline
+## 7. Jenkins CI/CD Pipeline
 
+Jenkins is integrated with the GitHub repository to automate the DevOps workflow, including Terraform infrastructure management, Docker image creation, Docker Hub publishing, and application deployment on AWS EC2.
 
+### Pipeline Stages
 
-Jenkins is integrated with the GitHub-hosted project to practise automated pipeline execution.
+| Stage | Purpose |
+|---|---|
+| Hello | Displays a welcome message |
+| DevOps Practice | Displays the technologies being practised |
+| Check Terraform Version | Checks the installed Terraform version |
+| Terraform Init | Initializes Terraform and configures the S3 remote backend |
+| Terraform Validate | Validates the Terraform configuration |
+| Terraform Plan | Generates an infrastructure execution plan |
+| Approval | Waits for manual approval |
+| Terraform Apply | Applies the approved Terraform plan |
+| Docker Version | Checks the Docker version |
+| Docker Build | Builds the custom Docker application image |
+| Docker Push | Pushes the Docker image to Docker Hub |
+| Prepare SSH | Prepares SSH known_hosts for EC2 connectivity |
+| Deploy to AWS EC2 | Pulls the Docker image and deploys the application on EC2 |
 
+### Terraform Backend Initialization
 
+The Jenkins pipeline uses:
 
-The Jenkins pipeline uses Terraform commands to validate and manage infrastructure.
-
-
-
-Pipeline Stages
-
-
-
-Stage| Purpose
-
-Hello| Displays a welcome message
-
-DevOps Practice| Displays the technologies being practised
-
-Check Terraform Version| Checks the installed Terraform version
-
-Terraform Init| Initializes the Terraform working directory and reconfigures the S3 backend
-
-Terraform Validate| Validates the Terraform configuration
-
-Terraform Plan| Generates an infrastructure execution plan
-
-Approval| Waits for manual approval before applying changes
-
-Terraform Apply| Applies the approved Terraform execution plan
-
-
-
-Terraform Backend Initialization in Jenkins
-
-
-
-The Jenkins pipeline uses the following command:
-
-
-
+```groovy
 bat 'terraform init -reconfigure'
+```
 
 
-
-This ensures that the Jenkins workspace uses the configured Amazon S3 remote backend.
-
-
-
-Pipeline Execution Results
-
-
-
-The Jenkins pipeline executed successfully.
-
-
-
-Observed results:
-
-
-
-\- GitHub repository checkout completed successfully.
-
-\- Terraform initialization completed successfully.
-
-\- S3 remote backend was configured successfully.
-
-\- Terraform configuration validation passed.
-
-\- Terraform plan completed successfully.
-
-\- Manual approval was provided.
-
-\- Terraform Apply completed successfully.
-
-\- Jenkins reported the final build status as "SUCCESS".
-
-
-
-The final execution reported:
-
-
-
-Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
-
-
-
-This indicated that the existing infrastructure already matched the Terraform configuration at that execution.
-
-
-
-8\. Git and GitHub Integration
+## 8. Git and GitHub Integration
 
 
 
@@ -422,7 +359,7 @@ Sensitive credentials and Terraform state files should not be committed to the r
 
 
 
-9\. Current Project Status
+## 9. Current Project Status
 
 
 
@@ -452,7 +389,7 @@ The following activities have been completed:
 
 
 
-10\. Learning Outcomes
+## 10. Learning Outcomes
 
 
 
@@ -524,13 +461,10 @@ Result: Terraform remote state storage was successfully verified in Amazon S3.
 
 
 
-\- Integrate Docker image build and validation into Jenkins.
 
 \- Explore automated GitHub-triggered Jenkins builds.
 
 \- Improve CI/CD pipeline automation.
-
-\- Practise Docker deployment on AWS EC2.
 
 \- Implement additional infrastructure security configurations.
 
